@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - My Home Cover</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+</head>
+
+<body>
+    <header class="sticky-header">
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./assets/logo-removebg.png" alt="HomeCover Logo">
+                </a>
+            </div>
+            <div class="burger" id="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="index.html#home">Accueil</a></li>
+                <li><a href="index.html#about">À Propos</a></li>
+                <li><a href="index.html#realisations">Réalisations</a></li>
+                <li><a href="index.html#testimonials">Témoignages</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact" class="scroll-reveal">
+            <div class="content">
+                <h2>Contactez-Nous</h2>
+                <p>Vous avez des questions ou souhaitez un devis ? Remplissez le formulaire ci-dessous, nous vous
+                    répondrons rapidement.</p>
+                <form class="contact-form" action="mailto:info@arageek.com" method="POST" enctype="text/plain">
+                    <div>
+                        <label for="name">Nom :</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div>
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="message">Message :</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MyHomeCover</div>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2025 MyHomeCover. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

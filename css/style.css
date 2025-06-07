@@ -110,9 +110,11 @@ nav ul li a:hover::after {
 
 .content {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: auto;
+    margin-top: 6rem;
     padding: 4rem 2rem;
     text-align: center;
+
 }
 
 h1, h2, h3 {
@@ -648,7 +650,7 @@ html {
     right: 20px;
     background-color: var(--main-beige);
     color: white;
-    padding: 10px 15px;
+    padding: 7px 15px;
     border-radius: 50%;
     display: none;
     cursor: pointer;
@@ -657,7 +659,7 @@ html {
 }
 
 .back-to-top:hover {
-    background-color: #ff4757;
+    background-color: var(--main-dark);
     transform: scale(1.1);
 }
 
@@ -743,4 +745,81 @@ html {
 }
 .burger.active span:nth-child(3) {
     transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* Design du formulaire de contact */
+.contact-form {
+    max-width: 450px;
+    margin: 2rem auto 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(68,68,68,0.08);
+    padding: 2rem 2rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.contact-form label {
+    display: block;
+    font-weight: 500;
+    color: var(--main-dark);
+    margin-bottom: 0.3rem;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--main-beige-dark);
+    border-radius: 6px;
+    background: var(--main-white);
+    font-size: 1rem;
+    color: var(--main-dark);
+    transition: border-color 0.2s;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--main-beige);
+    outline: none;
+}
+
+.contact-form button.cta-button {
+    margin-top: 0.5rem;
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+    border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .contact-form {
+        padding: 1.2rem 0.5rem;
+    }
+}
+
+#home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100vh;
+    padding: 0;
+}
+
+#home .content {
+    margin-top: 0;
+    padding: 4rem 2rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
