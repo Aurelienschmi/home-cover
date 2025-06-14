@@ -28,19 +28,27 @@ document.addEventListener("DOMContentLoaded", () => {
           if (targetSection) {
             e.preventDefault();
             const yOffset = -60; // Ajuste selon la hauteur de ton header
-            const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            const y =
+              targetSection.getBoundingClientRect().top +
+              window.pageYOffset +
+              yOffset;
             window.scrollTo({ top: y, behavior: "smooth" });
           }
         }
       });
     });
   }
+  const yearSpan = document.getElementById("current-year");
+  if (yearSpan) {
+    yearSpan.textContent = new Date().getFullYear();
+  }
 
   // Scroll reveal et header (seulement si header existe)
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
-      rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.75 &&
+      rect.top <=
+        (window.innerHeight || document.documentElement.clientHeight) * 0.75 &&
       rect.bottom >= 0 &&
       rect.left >= 0 &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
@@ -99,7 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     newsletterForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const emailInput = newsletterForm.querySelector('input[type="email"]');
-      const submitButton = newsletterForm.querySelector('button[type="submit"]');
+      const submitButton = newsletterForm.querySelector(
+        'button[type="submit"]'
+      );
 
       submitButton.innerHTML = "Subscribing...";
       submitButton.disabled = true;
@@ -198,6 +208,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  document.addEventListener("click", (e) => {
+  if (
+    navUl.classList.contains("active") &&
+    !navUl.contains(e.target) &&
+    !burger.contains(e.target)
+  ) {
+    navUl.classList.remove("active");
+    burger.classList.remove("active");
+  }
+});
+
   // Pre-order countdown (si présent)
   const preOrderCards = document.querySelectorAll(".pre-order-card");
   if (preOrderCards.length) {
@@ -210,11 +231,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (distance > 0) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        card.querySelector("p").innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        card.querySelector(
+          "p"
+        ).innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 
         setInterval(() => {
           const now = new Date().getTime();
@@ -222,11 +247,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (distance > 0) {
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            card.querySelector("p").innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+            card.querySelector(
+              "p"
+            ).innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
           } else {
             card.querySelector("p").innerHTML = "Available Now!";
           }
