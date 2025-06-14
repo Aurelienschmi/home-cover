@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Home Cover - Rénovation & Couverture</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+</head>
+
+<body>
+    <header class="sticky-header no-gradient">
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="./assets/logo-removebg.png" alt="HomeCover Logo">
+                </a>
+            </div>
+            <div class="burger" id="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul>
+                <li><a href="index.html#home">Accueil</a></li>
+                <li><a href="index.html#about">À Propos</a></li>
+                <li><a href="index.html#realisations">Réalisations</a></li>
+                <li><a href="index.html#testimonials">Témoignages</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact" class="scroll-reveal">
+            <div class="content">
+                <h2>Demande de Devis</h2>
+                <p>Remplissez le formulaire ci-dessous pour obtenir gratuitement et sans engagement votre devis
+                    personnalisé. Nous vous répondrons dans les plus brefs délais.</p>
+
+                <form class="contact-form" action="https://formsubmit.co/ef332ce77141a855133a5eebca862c57"
+                    method="POST">
+                    <!-- FormSubmit config -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="box">
+                    <input type="hidden" name="_next" value="http://127.0.0.1:5500/merci.html">
+
+                    <!-- Anti-spam honeypot -->
+                    <input type="text" name="_honey" style="display:none">
+
+                    <div>
+                        <label for="lastname">Nom :</label>
+                        <input type="text" id="lastname" name="nom" required>
+                    </div>
+                    <div>
+                        <label for="firstname">Prénom :</label>
+                        <input type="text" id="firstname" name="prenom" required>
+                    </div>
+                    <div>
+                        <label for="email">Email :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div>
+                        <label for="phone">Téléphone :</label>
+                        <input type="tel" id="phone" name="telephone" required pattern="[0-9]{10,}">
+                    </div>
+                    <div>
+                        <label for="city">Ville :</label>
+                        <input type="text" id="city" name="ville" required>
+                    </div>
+                    <div>
+                        <label for="project">Nature du projet :</label>
+                        <textarea id="project" name="projet" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Envoyer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MyHomeCover</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/myhomecover_" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@myhomecover" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p>&copy; 2025 MyHomeCover. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

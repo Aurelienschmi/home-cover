@@ -25,13 +25,39 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(68, 68, 68, 0.808); /* var(--main-dark) with opacity */
-    color: var(--main-white);
-    padding: 1rem;
     z-index: 1000;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    color: var(--main-white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: rgba(30, 30, 30, 0.95); /* Couleur de fond fixe de la barre */
 }
+
+/* Dégradé étendu au-dessus du contenu */
+.sticky-header::before {
+    content: "";
+    position: absolute;
+    top: 100%; /* juste après la barre */
+    left: 0;
+    right: 0;
+    height: 400px; /* profondeur du dégradé */
+    background: linear-gradient(
+        to bottom,
+        rgba(30, 30, 30, 0.95) 0%,
+        rgba(30, 30, 30, 0.8) 25%,
+        rgba(30, 30, 30, 0.5) 55%,
+        rgba(30, 30, 30, 0.2) 80%,
+        rgba(30, 30, 30, 0) 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+.sticky-header.no-gradient {
+    background: var(--main-bg) !important;
+}
+.sticky-header.no-gradient::before {
+    display: none !important;
+}
+
 
 nav {
     display: flex;
@@ -46,9 +72,9 @@ nav {
     font-weight: bold;
 }
 .logo img {
-    height: 80px;
+    height: 70px;
     width: auto;
-    max-width: 120px;
+    max-width: 200px;
     display: block;
 }
 
@@ -618,6 +644,12 @@ footer {
 .sticky-header.scrolled {
     background-color: var(--main-dark);
     padding: 0.5rem 1rem;
+}
+
+/* Cacher le dégradé quand scrolled */
+.sticky-header.scrolled::before {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Efeito de parallax suave */
