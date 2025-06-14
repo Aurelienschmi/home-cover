@@ -86,59 +86,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  // Add to cart (si présent)
-  const addToCartButtons = document.querySelectorAll(".add-to-cart");
-  if (addToCartButtons.length) {
-    addToCartButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        button.innerHTML = "Added to Cart";
-        button.classList.add("added");
-        setTimeout(() => {
-          button.innerHTML = "Add to Cart";
-          button.classList.remove("added");
-        }, 2000);
-      });
-    });
-  }
-
-  // Newsletter form (si présent)
-  const newsletterForm = document.getElementById("newsletter-form");
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const emailInput = newsletterForm.querySelector('input[type="email"]');
-      const submitButton = newsletterForm.querySelector(
-        'button[type="submit"]'
-      );
-
-      submitButton.innerHTML = "Subscribing...";
-      submitButton.disabled = true;
-
-      setTimeout(() => {
-        emailInput.value = "";
-        submitButton.innerHTML = "Subscribed!";
-        setTimeout(() => {
-          submitButton.innerHTML = "Subscribe";
-          submitButton.disabled = false;
-        }, 2000);
-      }, 1500);
-    });
-  }
-
   // Parallax effect (si présent)
   const parallaxSection = document.querySelector(".parallax");
   if (parallaxSection) {
     window.addEventListener("scroll", () => {
       const scrollPosition = window.pageYOffset;
       parallaxSection.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
-    });
-  }
-
-  // Live chat (si présent)
-  const liveChatButton = document.querySelector(".live-chat-button");
-  if (liveChatButton) {
-    liveChatButton.addEventListener("click", () => {
-      alert("Live chat feature is coming soon!");
     });
   }
 
@@ -161,36 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Gallery lightbox (si présent)
-  const galleryImages = document.querySelectorAll(".gallery-grid img");
-  if (galleryImages.length) {
-    galleryImages.forEach((img) => {
-      img.addEventListener("click", () => {
-        const lightbox = document.createElement("div");
-        lightbox.classList.add("lightbox");
-        lightbox.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
-        document.body.appendChild(lightbox);
-
-        lightbox.addEventListener("click", () => {
-          lightbox.remove();
-        });
-      });
-    });
-  }
-
-  // Blog card hover (si présent)
-  const blogCards = document.querySelectorAll(".blog-card");
-  if (blogCards.length) {
-    blogCards.forEach((card) => {
-      card.addEventListener("mouseenter", () => {
-        card.style.transform = "scale(1.05)";
-      });
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "scale(1)";
-      });
-    });
-  }
-
   // Burger menu (si présent)
   const burger = document.getElementById("burger-menu");
   const navUl = document.querySelector("nav ul");
@@ -209,62 +132,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("click", (e) => {
-  if (
-    navUl.classList.contains("active") &&
-    !navUl.contains(e.target) &&
-    !burger.contains(e.target)
-  ) {
-    navUl.classList.remove("active");
-    burger.classList.remove("active");
-  }
-});
-
-  // Pre-order countdown (si présent)
-  const preOrderCards = document.querySelectorAll(".pre-order-card");
-  if (preOrderCards.length) {
-    preOrderCards.forEach((card) => {
-      const dateText = card.querySelector("p")?.innerText.split(": ")[1];
-      if (!dateText) return;
-      const releaseDate = new Date(dateText).getTime();
-      const now = new Date().getTime();
-      const distance = releaseDate - now;
-
-      if (distance > 0) {
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        card.querySelector(
-          "p"
-        ).innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-        setInterval(() => {
-          const now = new Date().getTime();
-          const distance = releaseDate - now;
-
-          if (distance > 0) {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor(
-              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-            );
-            const minutes = Math.floor(
-              (distance % (1000 * 60 * 60)) / (1000 * 60)
-            );
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            card.querySelector(
-              "p"
-            ).innerHTML = `Release in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-          } else {
-            card.querySelector("p").innerHTML = "Available Now!";
-          }
-        }, 1000);
-      } else {
-        card.querySelector("p").innerHTML = "Available Now!";
+    if (
+      navUl.classList.contains("active") &&
+      !navUl.contains(e.target) &&
+      !burger.contains(e.target)
+    ) {
+      navUl.classList.remove("active");
+      burger.classList.remove("active");
+    }
+  });
+  document
+    .querySelector(".contact-form")
+    .addEventListener("submit", function (e) {
+      let invalids = [];
+      this.querySelectorAll("input, textarea").forEach((field) => {
+        if (!field.checkValidity()) {
+          field.classList.remove("shake", "invalid");
+          // Force reflow to restart animation
+          void field.offsetWidth;
+          field.classList.add("shake", "invalid");
+          invalids.push(field);
+        }
+      });
+      if (invalids.length > 0) {
+        e.preventDefault();
+        invalids[0].focus();
       }
     });
-  }
+
+  // Supprime la classe shake après l'animation pour pouvoir la rejouer
+  document
+    .querySelectorAll(".contact-form input, .contact-form textarea")
+    .forEach((field) => {
+      field.addEventListener("animationend", function () {
+        this.classList.remove("shake");
+      });
+      // Ajoute la classe invalid si l'utilisateur quitte le champ sans remplir
+      field.addEventListener("blur", function () {
+        if (!this.checkValidity() && this.value !== "") {
+          this.classList.add("invalid");
+        } else if (!this.checkValidity() && this.value === "") {
+          this.classList.add("invalid");
+        } else {
+          this.classList.remove("invalid");
+        }
+      });
+      // Retire la classe invalid dès qu'on tape
+      field.addEventListener("input", function () {
+        if (this.checkValidity()) {
+          this.classList.remove("invalid");
+        }
+      });
+    });
 });
