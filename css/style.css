@@ -72,12 +72,11 @@ nav {
     font-weight: bold;
 }
 .logo img {
-    height: 70px;
+    height: 90px;
+    max-width: 220px;
     width: auto;
-    max-width: 200px;
     display: block;
 }
-
 nav ul {
     display: flex;
     list-style: none;
@@ -126,7 +125,7 @@ nav ul li a:hover::after {
 }
 
 #home {
-    background-image: url('https://picsum.photos/1920/1080?random=14');
+    background-image: url('../assets/home-bg.jpg');
 }
 
 #realisations {
@@ -209,8 +208,25 @@ p {
 }
 
 .trust-badges img {
-    height: 50px;
-    width: auto;
+    height: 120px;
+    max-width: 240px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .trust-badges img {
+        height: 80px;
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 600px) {
+    .trust-badges img {
+        height: 50px;
+        max-width: 100px;
+    }
 }
 
 .product-grid, .testimonial-grid, .community-features, .guides-grid, .collection-grid, .blog-grid {
