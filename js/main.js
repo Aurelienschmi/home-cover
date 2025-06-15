@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Navigation
   const navLinks = document.querySelectorAll("nav a");
   const sections = document.querySelectorAll("section");
   const header = document.querySelector(".sticky-header");
 
-  // Ajout du bouton retour en haut uniquement si besoin
+  // Back to top button
   const backToTopButton = document.createElement("div");
   backToTopButton.classList.add("back-to-top");
   backToTopButton.innerHTML = "&uarr;";
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loader.style.display = "none";
   });
 
-  // Navigation scroll (seulement si navLinks existe)
+  // Smooth scroll navigation
   if (navLinks.length) {
     navLinks.forEach((link) => {
       link.addEventListener("click", (e) => {
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const targetSection = document.querySelector(targetId);
           if (targetSection) {
             e.preventDefault();
-            const yOffset = -60; // Ajuste selon la hauteur de ton header
+            const yOffset = -60;
             const y =
               targetSection.getBoundingClientRect().top +
               window.pageYOffset +
@@ -38,12 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
+  // Year in footer
   const yearSpan = document.getElementById("current-year");
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // Scroll reveal et header (seulement si header existe)
+  // Scroll reveal and header
   function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -86,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  // Parallax effect (si présent)
+  // Parallax effect
   const parallaxSection = document.querySelector(".parallax");
   if (parallaxSection) {
     window.addEventListener("scroll", () => {
@@ -95,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // FAQ accordion (si présent)
+  // FAQ accordion
   const faqItems = document.querySelectorAll(".faq-item");
   if (faqItems.length) {
     faqItems.forEach((item) => {
@@ -114,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Burger menu (si présent)
+  // Burger menu
   const burger = document.getElementById("burger-menu");
   const navUl = document.querySelector("nav ul");
   if (burger && navUl) {
@@ -133,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("click", (e) => {
     if (
+      navUl &&
       navUl.classList.contains("active") &&
       !navUl.contains(e.target) &&
       !burger.contains(e.target)
@@ -141,14 +145,15 @@ document.addEventListener("DOMContentLoaded", () => {
       burger.classList.remove("active");
     }
   });
-  document
-    .querySelector(".contact-form")
-    .addEventListener("submit", function (e) {
+
+  // Form validation animation
+  const contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
       let invalids = [];
       this.querySelectorAll("input, textarea").forEach((field) => {
         if (!field.checkValidity()) {
           field.classList.remove("shake", "invalid");
-          // Force reflow to restart animation
           void field.offsetWidth;
           field.classList.add("shake", "invalid");
           invalids.push(field);
@@ -160,28 +165,51 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  // Supprime la classe shake après l'animation pour pouvoir la rejouer
-  document
-    .querySelectorAll(".contact-form input, .contact-form textarea")
-    .forEach((field) => {
-      field.addEventListener("animationend", function () {
-        this.classList.remove("shake");
+    contactForm
+      .querySelectorAll("input, textarea")
+      .forEach((field) => {
+        field.addEventListener("animationend", function () {
+          this.classList.remove("shake");
+        });
+        field.addEventListener("blur", function () {
+          if (!this.checkValidity()) {
+            this.classList.add("invalid");
+          } else {
+            this.classList.remove("invalid");
+          }
+        });
+        field.addEventListener("input", function () {
+          if (this.checkValidity()) {
+            this.classList.remove("invalid");
+          }
+        });
       });
-      // Ajoute la classe invalid si l'utilisateur quitte le champ sans remplir
-      field.addEventListener("blur", function () {
-        if (!this.checkValidity() && this.value !== "") {
-          this.classList.add("invalid");
-        } else if (!this.checkValidity() && this.value === "") {
-          this.classList.add("invalid");
-        } else {
-          this.classList.remove("invalid");
-        }
+  }
+
+  // Carousel for about-image section
+  const track = document.querySelector('.about-image .carousel-track');
+  if (track) {
+    const images = track.querySelectorAll('img');
+    const prevBtn = document.querySelector('.about-image .carousel-btn.prev');
+    const nextBtn = document.querySelector('.about-image .carousel-btn.next');
+    let current = 0;
+
+    function showImage(idx) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === idx);
       });
-      // Retire la classe invalid dès qu'on tape
-      field.addEventListener("input", function () {
-        if (this.checkValidity()) {
-          this.classList.remove("invalid");
-        }
+    }
+    showImage(current);
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        current = (current - 1 + images.length) % images.length;
+        showImage(current);
       });
-    });
+      nextBtn.addEventListener('click', () => {
+        current = (current + 1) % images.length;
+        showImage(current);
+      });
+    }
+  }
 });

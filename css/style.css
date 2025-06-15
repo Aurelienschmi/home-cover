@@ -125,7 +125,7 @@ nav ul li a:hover::after {
 }
 
 #home {
-    background-image: url('../assets/home-bg.jpg');
+    background-image: url('../assets/home-bg.png');
 }
 
 #realisations {
@@ -899,4 +899,93 @@ html {
     border-color: #ff4757 !important;
     box-shadow: 0 0 0 2px rgba(255,71,87,0.15);
     animation: shake 0.3s;
+}
+
+.about-carousel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+}
+
+.about-carousel .carousel-track {
+    width: 380px;
+    height: 380px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: width 0.3s, height 0.3s;
+}
+
+.about-carousel .carousel-track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit tout le carré, rogne si besoin */
+    transition: opacity 0.5s;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    display: none;
+}
+.about-carousel .carousel-track img.active {
+    display: block;
+}
+
+.about-carousel .carousel-btn {
+    background: var(--main-beige);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about-carousel .carousel-btn:hover {
+    background: var(--main-beige-dark);
+}
+
+@media (max-width: 900px) {
+    .about-carousel {
+        max-width: 260px;
+    }
+    .about-carousel .carousel-track {
+        width: 220px;
+        height: 220px;
+    }
+    .about-carousel .carousel-track img {
+        height: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-carousel {
+        max-width: 95vw;
+    }
+    .about-carousel .carousel-track {
+        width: 90vw;
+        height: 90vw;
+        max-width: 320px;
+        max-height: 320px;
+        min-width: 120px;
+        min-height: 120px;
+    }
+    .about-carousel .carousel-track img {
+        height: 100%;
+    }
+    .about-carousel .carousel-btn {
+        width: 20px;
+        height: 20px;
+        font-size: 0.9rem;
+    }
 }
