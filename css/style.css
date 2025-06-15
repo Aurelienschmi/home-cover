@@ -1,7 +1,7 @@
 :root {
     --main-bg: #787878;
     --main-white: #e4e2dd;
-    --main-beige: #cfc6ad;
+    --main-beige: #beb496;
     --main-beige-dark: #bdb39c;
     --main-dark: #444444;
 }
@@ -153,7 +153,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--main-beige);
 }
 
@@ -183,7 +183,15 @@ p {
 
 .about-text {
     flex-basis: 60%;
-    text-align: left;
+    text-align: middle;
+    padding-right: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
 }
 
 .about-image {
