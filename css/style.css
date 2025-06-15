@@ -907,12 +907,12 @@ html {
     gap: 0.5rem;
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 600px;
 }
 
 .about-carousel .carousel-track {
-    width: 380px;
-    height: 380px;
+    width: 450px;
+    height: 450px;
     display: flex;
     overflow: hidden;
     border-radius: 16px;
