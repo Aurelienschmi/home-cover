@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const targetSection = document.querySelector(targetId);
           if (targetSection) {
             e.preventDefault();
-            const yOffset = -60;
+            const yOffset = -100;
             const y =
               targetSection.getBoundingClientRect().top +
               window.pageYOffset +
