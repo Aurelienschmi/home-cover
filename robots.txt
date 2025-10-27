@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
+Disallow: /merci.html
 
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
+
+# Sitemap
 Sitemap: https://myhomecover.fr/sitemap.xml
+
+# Directives spécifiques pour les principaux bots
+User-agent: Googlebot
+Allow: /
+Disallow: /merci.html
+
+User-agent: Bingbot
+Allow: /
+Disallow: /merci.html

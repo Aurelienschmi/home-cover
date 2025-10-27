@@ -3,26 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Merci pour votre demande</title>
+    <title>Merci pour votre demande - MyHomeCover</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Votre demande de devis a été envoyée avec succès. Nous vous répondrons sous 48h.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="preload" href="./css/style.css" as="style">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="canonical" href="https://myhomecover.fr/merci.html">
 </head>
 
 <body>
     <main>
         <section class="scroll-reveal"
             style="min-height: 80vh; display: flex; align-items: center; justify-content: center;">
-            <div class="content" style="max-width: 500px;">
-                <h2>Merci pour votre demande !</h2>
-                <p>Nous avons bien reçu votre formulaire et vous répondrons dans les plus brefs délais.</p>
-                <a href="index.html" class="cta-button" style="margin-top:2rem;">← Retour à l’accueil</a>
+            <div class="content" style="max-width: 500px; text-align: center;">
+                <div style="font-size: 4rem; color: var(--main-beige); margin-bottom: 1rem;" aria-hidden="true">✓</div>
+                <h1>Merci pour votre demande !</h1>
+                <p>Nous avons bien reçu votre formulaire de devis et vous répondrons <strong>sous 48h maximum</strong>.</p>
+                <a href="index.html" class="cta-button" style="margin-top:2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    Retour à l'accueil
+                </a>
             </div>
         </section>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MyHomeCover</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/myhomecover_" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@myhomecover" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> My Home Cover. Tous droits réservés.</p>
+        </div>
+    </footer>
     <script src="./js/main.js"></script>
 
 </body>
 
 </html>
+

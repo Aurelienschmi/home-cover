@@ -4,11 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Home Cover - Rénovation & Couverture</title>
+    <title>Devis Gratuit - MyHomeCover | Covering Mobilier Intérieur</title>
+    <meta name="description" content="Demandez votre devis gratuit pour vos projets de covering mobilier. Réponse sous 48h. Rénovation cuisine, meubles, escaliers sans travaux salissants.">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Devis Gratuit - MyHomeCover">
+    <meta property="og:description" content="Demandez votre devis gratuit pour vos projets de covering mobilier. Réponse sous 48h.">
+    <meta property="og:url" content="https://myhomecover.fr/devis.html">
+    <meta property="og:type" content="website">
+    
+    <link rel="preload" href="./css/style.css" as="style">
     <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="canonical" href="https://myhomecover.fr/devis.html">
 </head>
 
 <body>
@@ -41,42 +52,53 @@
                 <p>Remplissez le formulaire ci-dessous pour obtenir gratuitement et sans engagement votre devis
                     personnalisé. Nous vous répondrons dans les plus brefs délais.</p>
 
-                <form class="contact-form" action="https://formsubmit.co/myhomecover.pro@gmail.com" method="POST" novalidate>
+                <form class="contact-form" action="https://formsubmit.co/myhomecover.pro@gmail.com" method="POST" novalidate aria-label="Formulaire de demande de devis">
                     <!-- FormSubmit config -->
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="box">
                     <input type="hidden" name="_next" value="https://myhomecover.fr/merci.html">
+                    <input type="hidden" name="_subject" value="Nouvelle demande de devis - MyHomeCover">
 
                     <!-- Anti-spam honeypot -->
-                    <input type="text" name="_honey" style="display:none">
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
                     <div>
-                        <label for="lastname">Nom :</label>
-                        <input type="text" id="lastname" name="nom" required placeholder="Entrez votre nom">
+                        <label for="lastname">Nom <span aria-label="requis">*</span> :</label>
+                        <input type="text" id="lastname" name="nom" required placeholder="Entrez votre nom" autocomplete="family-name" aria-describedby="lastname-error">
+                        <span id="lastname-error" class="error-message" role="alert"></span>
                     </div>
                     <div>
-                        <label for="firstname">Prénom :</label>
-                        <input type="text" id="firstname" name="prenom" required placeholder="Entrez votre prénom">
+                        <label for="firstname">Prénom <span aria-label="requis">*</span> :</label>
+                        <input type="text" id="firstname" name="prenom" required placeholder="Entrez votre prénom" autocomplete="given-name" aria-describedby="firstname-error">
+                        <span id="firstname-error" class="error-message" role="alert"></span>
                     </div>
                     <div>
-                        <label for="email">Email :</label>
-                        <input type="email" id="email" name="email" required placeholder="Entrez votre email">
+                        <label for="email">Email <span aria-label="requis">*</span> :</label>
+                        <input type="email" id="email" name="email" required placeholder="exemple@email.com" autocomplete="email" aria-describedby="email-error">
+                        <span id="email-error" class="error-message" role="alert"></span>
                     </div>
                     <div>
-                        <label for="phone">Téléphone :</label>
-                        <input type="tel" id="phone" name="telephone" required pattern="[0-9]{10,}"
-                            placeholder="Entrez votre téléphone">
+                        <label for="phone">Téléphone <span aria-label="requis">*</span> :</label>
+                        <input type="tel" id="phone" name="telephone" required pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+                            placeholder="01 23 45 67 89" autocomplete="tel" aria-describedby="phone-error">
+                        <span id="phone-error" class="error-message" role="alert"></span>
                     </div>
                     <div>
-                        <label for="city">Ville :</label>
-                        <input type="text" id="city" name="ville" required placeholder="Entrez votre ville">
+                        <label for="city">Ville <span aria-label="requis">*</span> :</label>
+                        <input type="text" id="city" name="ville" required placeholder="Entrez votre ville" autocomplete="address-level2" aria-describedby="city-error">
+                        <span id="city-error" class="error-message" role="alert"></span>
                     </div>
                     <div>
-                        <label for="project">Nature du projet :</label>
+                        <label for="project">Nature du projet <span aria-label="requis">*</span> :</label>
                         <textarea id="project" name="projet" rows="4" required
-                            placeholder="Décrivez votre projet"></textarea>
+                            placeholder="Décrivez votre projet : type de surface, dimensions approximatives, style souhaité..." aria-describedby="project-error"></textarea>
+                        <span id="project-error" class="error-message" role="alert"></span>
                     </div>
-                    <button type="submit" class="cta-button">Envoyer</button>
+                    <button type="submit" class="cta-button" aria-describedby="submit-info">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                        Envoyer ma demande
+                    </button>
+                    <p id="submit-info" class="form-info">Réponse garantie sous 48h</p>
                 </form>
             </div>
         </section>
@@ -89,7 +111,7 @@
                 <a href="https://www.instagram.com/myhomecover_" target="_blank"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.tiktok.com/@myhomecover" target="_blank"><i class="fab fa-tiktok"></i></a>
             </div>
-            <p>&copy; 2025 MyHomeCover. All rights reserved.</p>
+            <p>&copy; <span id="current-year"></span> My Home Cover. Tous droits réservés.</p>
         </div>
     </footer>
 
@@ -97,3 +119,4 @@
 </body>
 
 </html>
+

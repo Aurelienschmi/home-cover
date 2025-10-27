@@ -812,14 +812,16 @@ html {
     background: var(--main-white);
     font-size: 1rem;
     color: var(--main-dark);
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
     resize: vertical;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--main-beige);
-    outline: none;
+    outline: 2px solid var(--main-beige);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(190, 180, 150, 0.1);
 }
 
 .contact-form button.cta-button {
@@ -828,6 +830,99 @@ html {
     font-size: 1.1rem;
     padding: 0.8rem 0;
     border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Messages d'erreur */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+    min-height: 1.2rem;
+}
+
+.form-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--main-beige);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Amélioration accessibilité */
+.contact-form input:invalid:not(:focus):not(:placeholder-shown),
+.contact-form textarea:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #d32f2f;
+}
+
+/* Focus visible pour tous les éléments interactifs */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.carousel-btn:focus-visible,
+.btn:focus-visible {
+    outline: 2px solid var(--main-beige);
+    outline-offset: 2px;
+}
+
+/* Amélioration du contraste pour l'accessibilité */
+.nav .btn {
+    background-color: rgba(255,255,255,0.9);
+    color: rgba(0,0,0,0.8);
+    border: 2px solid rgba(0,0,0,0.7);
+}
+
+.nav .btn:hover,
+.nav .btn:focus {
+    background-color: rgba(255,255,255,1);
+    color: rgba(0,0,0,0.9);
+}
+
+/* Classe pour les lecteurs d'écran */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Optimisation des performances - réduction des repaints */
+.carousel-btn,
+.cta-button,
+.add-to-cart,
+.nav .btn {
+    will-change: transform;
+}
+
+.carousel-btn:hover,
+.cta-button:hover,
+.add-to-cart:hover,
+.nav .btn:hover {
+    will-change: auto;
+}
+
+/* Préférence de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .parallax {
+        background-attachment: scroll;
+    }
 }
 
 /* Responsive */

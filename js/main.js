@@ -10,14 +10,40 @@ document.addEventListener("DOMContentLoaded", () => {
   backToTopButton.innerHTML = "&uarr;";
   document.body.appendChild(backToTopButton);
 
-  // Loader
+  // Loader - version améliorée
   const loader = document.createElement("div");
   loader.classList.add("loader");
+  loader.style.position = "fixed";
+  loader.style.top = "0";
+  loader.style.left = "0";
+  loader.style.width = "100%";
+  loader.style.height = "100%";
+  loader.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+  loader.style.display = "flex";
+  loader.style.justifyContent = "center";
+  loader.style.alignItems = "center";
+  loader.style.zIndex = "9999";
   document.body.appendChild(loader);
 
-  window.addEventListener("load", () => {
-    loader.style.display = "none";
-  });
+  // Cacher le loader après chargement complet
+  const hideLoader = () => {
+    if (loader && loader.parentNode) {
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 0.3s";
+      setTimeout(() => {
+        if (loader.parentNode) {
+          loader.parentNode.removeChild(loader);
+        }
+      }, 300);
+    }
+  };
+
+  // Plusieurs événements pour s'assurer que le loader disparaît
+  window.addEventListener("load", hideLoader);
+  document.addEventListener("DOMContentLoaded", hideLoader);
+  
+  // Fallback au cas où les événements ne se déclenchent pas
+  setTimeout(hideLoader, 2000);
 
   // Smooth scroll navigation
   if (navLinks.length) {
@@ -149,41 +175,113 @@ document.addEventListener("DOMContentLoaded", () => {
   // Form validation animation
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
+    // Amélioration de la validation du formulaire
     contactForm.addEventListener("submit", function (e) {
       let invalids = [];
+      let isValid = true;
+      
       this.querySelectorAll("input, textarea").forEach((field) => {
+        const errorSpan = document.getElementById(field.id + "-error");
+        
         if (!field.checkValidity()) {
           field.classList.remove("shake", "invalid");
           void field.offsetWidth;
           field.classList.add("shake", "invalid");
+          
+          // Messages d'erreur personnalisés
+          let errorMessage = "";
+          if (field.validity.valueMissing) {
+            errorMessage = "Ce champ est requis";
+          } else if (field.validity.typeMismatch) {
+            if (field.type === "email") {
+              errorMessage = "Veuillez entrer une adresse email valide";
+            } else if (field.type === "tel") {
+              errorMessage = "Veuillez entrer un numéro de téléphone valide";
+            }
+          } else if (field.validity.patternMismatch) {
+            if (field.type === "tel") {
+              errorMessage = "Format attendu : 01 23 45 67 89";
+            }
+          }
+          
+          if (errorSpan) {
+            errorSpan.textContent = errorMessage;
+          }
+          
           invalids.push(field);
+          isValid = false;
+        } else {
+          field.classList.remove("invalid");
+          if (errorSpan) {
+            errorSpan.textContent = "";
+          }
         }
       });
-      if (invalids.length > 0) {
+      
+      if (!isValid) {
         e.preventDefault();
         invalids[0].focus();
+        
+        // Annonce pour les lecteurs d'écran
+        const announcement = document.createElement("div");
+        announcement.setAttribute("aria-live", "polite");
+        announcement.setAttribute("aria-atomic", "true");
+        announcement.className = "sr-only";
+        announcement.textContent = `Erreur dans le formulaire. ${invalids.length} champ(s) à corriger.`;
+        document.body.appendChild(announcement);
+        
+        setTimeout(() => {
+          document.body.removeChild(announcement);
+        }, 3000);
       }
     });
 
-    contactForm
-      .querySelectorAll("input, textarea")
-      .forEach((field) => {
-        field.addEventListener("animationend", function () {
-          this.classList.remove("shake");
-        });
-        field.addEventListener("blur", function () {
-          if (!this.checkValidity()) {
-            this.classList.add("invalid");
-          } else {
-            this.classList.remove("invalid");
-          }
-        });
-        field.addEventListener("input", function () {
-          if (this.checkValidity()) {
-            this.classList.remove("invalid");
-          }
-        });
+    // Validation en temps réel améliorée
+    contactForm.querySelectorAll("input, textarea").forEach((field) => {
+      field.addEventListener("animationend", function () {
+        this.classList.remove("shake");
       });
+      
+      field.addEventListener("blur", function () {
+        const errorSpan = document.getElementById(this.id + "-error");
+        
+        if (!this.checkValidity() && this.value.trim() !== "") {
+          this.classList.add("invalid");
+          
+          let errorMessage = "";
+          if (this.validity.typeMismatch) {
+            if (this.type === "email") {
+              errorMessage = "Veuillez entrer une adresse email valide";
+            } else if (this.type === "tel") {
+              errorMessage = "Veuillez entrer un numéro de téléphone valide";
+            }
+          } else if (this.validity.patternMismatch) {
+            if (this.type === "tel") {
+              errorMessage = "Format attendu : 01 23 45 67 89";
+            }
+          }
+          
+          if (errorSpan) {
+            errorSpan.textContent = errorMessage;
+          }
+        } else {
+          this.classList.remove("invalid");
+          if (errorSpan) {
+            errorSpan.textContent = "";
+          }
+        }
+      });
+      
+      field.addEventListener("input", function () {
+        if (this.checkValidity()) {
+          this.classList.remove("invalid");
+          const errorSpan = document.getElementById(this.id + "-error");
+          if (errorSpan) {
+            errorSpan.textContent = "";
+          }
+        }
+      });
+    });
   }
 
   // Carousel for about-image section
