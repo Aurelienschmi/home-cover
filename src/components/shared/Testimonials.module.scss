@@ -1,0 +1,65 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.section {
+    padding: v.$space-xxl 0;
+    background-color: white;
+}
+
+.container {
+    @include m.container;
+}
+
+.title {
+    font-size: v.$font-size-h2;
+    text-align: center;
+    margin-bottom: v.$space-xl;
+    color: v.$secondary;
+
+    span {
+        color: v.$primary;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: v.$space-lg;
+
+    @media (min-width: v.$tablet) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    @include m.card;
+    padding: v.$space-lg;
+    background-color: v.$background;
+    border: 1px solid v.$border;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-md;
+
+    p {
+        font-style: italic;
+        color: v.$text-light;
+        line-height: 1.6;
+        flex-grow: 1;
+
+        &::before {
+            content: '"';
+            font-size: 2rem;
+            color: v.$primary;
+            line-height: 1;
+            vertical-align: -0.4rem;
+            margin-right: 4px;
+        }
+    }
+
+    h4 {
+        color: v.$secondary;
+        font-weight: 600;
+        text-align: right;
+        margin: 0;
+    }
+}

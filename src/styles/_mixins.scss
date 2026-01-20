@@ -1,0 +1,100 @@
+@use 'variables' as vars;
+@use 'sass:color';
+
+/* Flexbox Utilities */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout Utilities */
+@mixin container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: vars.$space-md;
+    padding-right: vars.$space-md;
+
+    @media (min-width: vars.$mobile) {
+        padding-left: vars.$space-lg;
+        padding-right: vars.$space-lg;
+    }
+}
+
+/* Visual Effects */
+@mixin glassmorphism {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@mixin card {
+    background-color: vars.$surface;
+    border-radius: 12px;
+    box-shadow: vars.$shadow-md;
+    padding: vars.$space-lg;
+}
+
+/* Responsive */
+@mixin respond-to($breakpoint) {
+    @if $breakpoint ==mobile {
+        @media (max-width: vars.$mobile) {
+            @content;
+        }
+    }
+
+    @if $breakpoint ==tablet {
+        @media (max-width: vars.$tablet) {
+            @content;
+        }
+    }
+}
+
+@mixin hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: vars.$shadow-lg;
+    }
+}
+
+@mixin btn-premium {
+    display: inline-block;
+    background: linear-gradient(135deg, vars.$primary 0%, vars.$primary-dark 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: vars.$shadow-md;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -10px rgba(vars.$primary, 0.5);
+        background: linear-gradient(135deg, color.adjust(vars.$primary, $lightness: 5%) 0%, vars.$primary-dark 100%);
+    }
+
+    &:active {
+        transform: scale(0.98);
+        box-shadow: vars.$shadow-sm;
+    }
+}

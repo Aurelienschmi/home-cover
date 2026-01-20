@@ -1,0 +1,22 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-family: v.$font-stack;
+    color: v.$text;
+    background-color: v.$background;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}

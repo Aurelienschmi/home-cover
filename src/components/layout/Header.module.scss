@@ -1,0 +1,83 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(v.$secondary, 0.95); // Dark Anthracite
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    padding: v.$space-md 0;
+}
+
+.container {
+    @include m.container;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    a {
+        display: block;
+        font-family: v.$font-stack;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: white; // White text for contrast
+        text-decoration: none;
+        letter-spacing: -0.5px;
+        border: none;
+        padding: 0;
+        border-radius: 4px;
+    }
+}
+
+.nav {
+    ul {
+        display: none;
+        gap: v.$space-lg;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @media (min-width: v.$tablet) {
+            display: flex;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        font-size: v.$font-size-sm;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.8); // Off-white text
+        transition: color 0.2s ease;
+        padding-bottom: 2px;
+        border-bottom: 2px solid transparent;
+
+        &:hover,
+        &.active {
+            color: v.$primary; // Bronze accent
+            border-bottom-color: v.$primary;
+        }
+    }
+}
+
+.mobileMenuBtn {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: v.$text;
+
+    @include m.respond-to(mobile) {
+        display: block;
+    }
+}

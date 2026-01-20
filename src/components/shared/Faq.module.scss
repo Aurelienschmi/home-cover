@@ -1,0 +1,82 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.section {
+    padding: v.$space-xxl 0;
+    background-color: v.$background;
+}
+
+.container {
+    @include m.container;
+    max-width: 800px; // Narrower for reading
+}
+
+.title {
+    font-size: v.$font-size-h2;
+    text-align: center;
+    margin-bottom: v.$space-xl;
+    color: v.$secondary;
+
+    span {
+        color: v.$primary;
+    }
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-md;
+}
+
+.item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: v.$shadow-sm;
+}
+
+.question {
+    width: 100%;
+    padding: v.$space-lg;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: v.$font-size-lg;
+    color: v.$secondary;
+    font-weight: 500;
+    font-family: v.$font-stack;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: rgba(v.$primary, 0.05);
+    }
+
+    span {
+        font-size: 1.5rem;
+        color: v.$primary;
+        margin-left: v.$space-md;
+    }
+}
+
+.answer {
+    padding: 0 v.$space-lg v.$space-lg;
+    color: v.$text-light;
+    line-height: 1.6;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

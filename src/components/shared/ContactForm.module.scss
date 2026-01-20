@@ -1,0 +1,80 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.form {
+    @include m.card;
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-lg;
+    width: 100%;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-xs;
+
+    label {
+        font-weight: 500;
+        color: v.$text;
+        font-size: v.$font-size-sm;
+    }
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: v.$space-md;
+    border: 1px solid v.$border;
+    border-radius: 8px;
+    background-color: white;
+    font-family: v.$font-stack;
+    font-size: v.$font-size-base;
+    transition: all 0.2s ease;
+
+    &:focus {
+        outline: none;
+        border-color: v.$primary;
+        box-shadow: 0 0 0 3px rgba(v.$primary, 0.1);
+    }
+}
+
+.textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submitBtn {
+    @include m.btn-premium;
+    width: 100%;
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        background: v.$text-light;
+        box-shadow: none;
+        transform: none;
+    }
+}
+
+.successMessage {
+    padding: v.$space-md;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

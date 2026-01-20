@@ -1,0 +1,35 @@
+@use '../styles/variables' as v;
+@use '../styles/mixins' as m;
+
+.container {
+    @include m.container;
+    @include m.flex-center;
+    flex-direction: column;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.title {
+    font-size: 6rem;
+    font-weight: 800;
+    color: v.$primary;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtitle {
+    font-size: v.$font-size-h2;
+    color: v.$text;
+    margin-bottom: v.$space-md;
+}
+
+.text {
+    color: v.$text-light;
+    margin-bottom: v.$space-xl;
+    font-size: v.$font-size-lg;
+}
+
+.homeLink {
+    @include m.btn-premium;
+    text-decoration: none;
+}

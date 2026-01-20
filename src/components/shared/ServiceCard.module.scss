@@ -1,0 +1,98 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.card {
+    @include m.card;
+    @include m.hover-lift;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    border: 1px solid v.$border;
+    transition: all 0.3s ease;
+    padding: 0; // Remove default padding for full image
+
+    &:hover {
+        border-color: v.$secondary;
+
+        .imageContainer img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+
+    img {
+        transition: transform 0.5s ease;
+    }
+}
+
+.iconOverlay {
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: v.$surface;
+    border-radius: 50%;
+    @include m.flex-center;
+    font-size: 1.5rem;
+    box-shadow: v.$shadow-md;
+    z-index: 2;
+}
+
+// Fallback if no image
+.icon {
+    font-size: 3rem;
+    margin: v.$space-md;
+    width: 80px;
+    height: 80px;
+    @include m.flex-center;
+    background-color: rgba(v.$primary, 0.05);
+    border-radius: 50%;
+}
+
+.content {
+    padding: v.$space-lg;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.title {
+    font-size: v.$font-size-xl;
+    color: v.$secondary;
+    margin-bottom: v.$space-sm;
+    font-weight: 600;
+}
+
+.description {
+    color: v.$text-light;
+    margin-bottom: v.$space-lg;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.link {
+    font-weight: 500;
+    color: v.$primary;
+    margin-top: auto;
+    transition: all 0.3s ease;
+
+    &::after {
+        content: ' →';
+        transition: margin 0.3s ease;
+    }
+}

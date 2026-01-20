@@ -1,0 +1,55 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.hero {
+    background-color: v.$secondary;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80'); // Modern Kitchen
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 80vh;
+    @include m.flex-center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    padding: 0 v.$space-md;
+
+    h1 {
+        font-size: 3.5rem;
+        margin-bottom: v.$space-md;
+        line-height: 1.2;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+
+        @media (max-width: v.$tablet) {
+            font-size: 2.5rem;
+        }
+    }
+
+    p {
+        font-size: 1.5rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+    }
+
+    .ctaButton {
+        @include m.btn-premium;
+        text-decoration: none;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
